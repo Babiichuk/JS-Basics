@@ -18,7 +18,7 @@ function setTodoState(array, idValue, completedStatus) {
       array[i].completed = completedStatus;
     }
   }
-}
+};
 
 function deleteTodo(array, idValue) {
   let index = array.findIndex((n) => n.id === idValue);
@@ -27,9 +27,14 @@ function deleteTodo(array, idValue) {
 
 let todoId = 0;
 let todoContId = 0;
+
+let todoTitle = null;
+let ourUser = null;
+
 function addTodoBlock() {
-  // let todoTitle=prompt('Input title please');
-  // let ourUser=prompt('What is your name?');
+  let todoTitle = prompt('Input title please');
+  let ourUser = prompt('What is your name?');
+  addTodo(todos, ourUser, todoId, todoTitle, 'false');
   function addDiv() {
     let container = document.getElementById("todos");
     let addDiv = document.createElement("div");
@@ -61,7 +66,7 @@ function addTodoBlock() {
     contDivP();
 
     let titleText = document.getElementById(`todocont${todoContId}`).firstChild;
-    titleText.append(`Todo`);
+    titleText.append(`Todo: ${todoTitle}`);
 
     function contDiv2() {
       let todoContainer = document.getElementById(`${todoId}`);
@@ -99,21 +104,36 @@ function addTodoBlock() {
   }
   addTodoContainerDiv();
 
-  todoId += 1;
+
   let userText = document.getElementById(`todocont${todoContId}`).firstChild;
-  userText.append(`User`);
-  console.log(todoId);
-}
+  userText.append(`User: ${ourUser}`);
+  todoId += 1;
+  console.log(todos);
+};
 
 let addTodoButton = document.getElementById("addbutton");
 addTodoButton.onclick = function () {
   addTodoBlock();
 };
 
-let delBut = document.getElementsByClassName("delete-icon");
-delBut.onclick = function () {
-  console.log("click");
-};
-console.log(delBut);
+let delStateBut = document.getElementById("todos");
+delStateBut.onclick = function () {
+  let targetBtn = event.target;
+  let targ = targetBtn.closest('.todo');
+  let curBlock = parseInt(targ.id);
+  if (targetBtn.className == 'delete-icon') {
+    targ.remove();
+    deleteTodo(todos, curBlock);
+    // console.log(typeof curBlock);
+    console.log(todos);
 
-// 7 часов уже пишу этот код немогу больше ) надо больше времени сдаю пока как есть
+  } else if (targetBtn.className == 'state-icon') {
+    targ.classList.add("completed");
+    setTodoState(todos, curBlock, 'true');
+    console.log(todos);
+  } else {
+    return;
+  };
+};
+
+

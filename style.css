@@ -36,12 +36,14 @@ body {
   padding: 20px;
   margin-bottom: 10px;
   border: 1px solid #706f6f;
+  border-radius: 10px;
 }
 
 .todo-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
+ 
 }
 
 .todo .state-icon,
@@ -80,7 +82,13 @@ body {
 }
 
 h1 {
+  color: green;
   cursor: pointer;
+  padding: 20px;
+  margin-bottom: 10px;
+  border: 1px solid #706f6f;
+  border-radius: 10px;
+  text-align: center;
 }
 .redone {
   color: red;
