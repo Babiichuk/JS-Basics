@@ -1,1 +1,1 @@
-# JS-Basics
+# JS-Basics By Taia Boiko
